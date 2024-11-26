@@ -1,0 +1,115 @@
+
+/* Box around the task details */
+.task-details {
+    background-color: #fef7ea; 
+    margin-left: 120px;
+    border-color: #7c7c74;
+    border-style: solid;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; 
+    max-width: 550px; 
+  }
+  
+  /* Box that description goes in */
+  .task-popup {
+    position: fixed;
+    font-family: 'Roboto', monospace;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    padding: 20px;
+    margin-left: 30px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 1000;
+  }
+  
+  .task-popup.hidden {
+    display: none;
+  }
+  
+  .task-popup-content {
+    display: flex;
+    padding: 20px;
+    gap: 10px;
+    flex-direction: column;
+    font-family: 'Roboto', monospace;
+  }
+  
+  .task-label {
+    font-family: 'Roboto', monospace;
+    font-size: 1rem;
+    margin-top: 3px;
+  }
+
+  #task-description {
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 0.9rem;
+    font-family: 'Roboto', monospace;
+  }
+  
+  #task-description::placeholder {
+    color: #8d8d8d;
+    font-style: italic; 
+  }
+  
+  /* Choosing category */ 
+  .category-dropdown {
+    width: 30%;
+    padding: 8px 10px 8px 15px;
+    font-family: 'Roboto', monospace;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    border: 2px solid #ccc;
+    background-color: #fff;
+    margin-top: 4px;
+    margin-bottom: 8px;
+  }
+  
+  .task-textarea {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    font-family: 'Roboto', monospace;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+  }
+
+.estimated-time {
+    display: flex;
+    margin: 20px 10px 0px 0px;
+    align-items: left;
+    width: 100%;
+    white-space: nowrap; 
+  }
+  
+/* No default arrows */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield; 
+}
+
+  .time-unit {
+    font-family: 'Roboto', monospace;
+    font-size: 0.9rem;
+    color: black;
+  }
+  
+  

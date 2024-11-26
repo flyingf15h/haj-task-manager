@@ -72,37 +72,27 @@ hr {
 /* Date on top of page */
 #display-date {
   font-family: 'Cascadia Code', monospace;
-  font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 2.2rem;
   text-align: center;
-  margin-top: 5%;
+  margin-top: 25px;
 }
 
-/* Input bar */ 
-#user-input {
-  display: block;
-  margin: 10px auto; 
-  width: 60%;       
-  border: none;    
-  border-bottom: 2px solid gray;
-  padding: 2px; 
-  padding-left: 5px;    
-  font-size: 0.9rem;
-  font-family: 'Roboto', monospace;
-  background: none;  
-  color: #222;      
-  text-align: left;
-  font-style: normal
+button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  font-size: 1rem;
+  background-color: #3cb5be;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: inline-block;
+  cursor: pointer;
 }
 
-#user-input:focus {
-  outline: none;       /* Removes the default blue focus border */
-  border-bottom: 2px solid black; /* Highlights the line on focus */
-}
-
-#user-input::placeholder {
-  color: gray; /* Placeholder text color */
-  font-style: italic; /* Optional: makes placeholder text italic */
+button:hover {
+  background-color: #24797f;
 }
 
 .container {
