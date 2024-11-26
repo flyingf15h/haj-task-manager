@@ -44,11 +44,13 @@
       <input type="text" id="user-input" placeholder="New task name" aria-label="User input">
       
       <!-- Details box when clicking into a task -->
-      <div class="task-popup-hidden" id="description">
+      <div class="task-popup-hidden" id="details">
         <div class="task-details">
           <div class="task-content">
-
-            <label for="task-category" class="task-label">Category:</label>
+            <label for="task-title-input" class="task-label">Task Name:</label>
+            <input type="text" id="task-title-input" class="task-title-input">
+            <br>
+            <label for="task-category" class="task-label">Task Category:</label>
             <select id="task-category" class="category-dropdown">
             <option value="work">Work</option>
             <option value="personal">Personal</option>
@@ -65,7 +67,7 @@
             </div>
             
             <br>
-            <label for="task-description" style="font-family: 'Roboto', monospace; font-size: 1rem;"> Description </label>
+            <label for="task-description" style="font-family: 'Roboto', monospace; font-size: 1rem;"> Description: </label>
             <textarea id="task-description" rows="4" placeholder="Description"></textarea>
             
             <button id="save-task">Save New Task</button>
@@ -77,7 +79,7 @@
     </div>
   </div>
   <script src="js/app.js"></script>
-  <script src="js/description.js"></script>
+  <script src="js/input.js"></script>
 
 </body>
 

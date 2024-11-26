@@ -4,6 +4,7 @@
     background-color: #fef7ea; 
     margin-left: 120px;
     border-color: #7c7c74;
+    transition: border-color 0.3s ease; 
     border-style: solid;
     padding: 20px;
     border-radius: 4px;
@@ -31,10 +32,10 @@
     z-index: 1000;
   }
   
-  .task-popup.hidden {
+  .task-popup-hidden {
     display: none;
   }
-  
+
   .task-popup-content {
     display: flex;
     padding: 20px;
@@ -95,16 +96,16 @@
     white-space: nowrap; 
   }
   
-/* No default arrows */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
+  /* No default arrows */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
+  }
 
-input[type="number"] {
+  input[type="number"] {
     -moz-appearance: textfield; 
-}
+  }
 
   .time-unit {
     font-family: 'Roboto', monospace;
