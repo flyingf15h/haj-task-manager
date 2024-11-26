@@ -1,86 +1,74 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+  <title>Task Manager</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/task-details.css">
   <link rel="stylesheet" href="css/input.css">
-
-  <meta name="description" content="">
-
-  <meta property="og:title" content="">
-  <meta property="og:type" content="">
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
-
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" href="/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="icon.png">
-
-  <link rel="manifest" href="site.webmanifest">
-  <meta name="theme-color" content="#fafafa">
 </head>
-
 <body>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <div class="container">
+    <!-- Sidebar -->
     <div class="sidebar">
       <div class="text">
         Reminder to drink water
       </div>
     </div>
+
+    <!-- Main Content -->
     <div class="main-content">
-        <div id="display-date"></div>
+      <!-- Display Date -->
+      <div id="display-date"></div>
       <script src="js/date.js"></script>
       <hr>
+
+      <!-- New Task Input -->
       <input type="text" id="user-input" placeholder="New task name" aria-label="User input">
       
-      <!-- Details box when clicking into a task -->
+      <!-- Task List Container -->
+      <div id="task-list" class="task-list">
+        <!-- New tasks will be appended here -->
+      </div>
+
+      <!-- Details Box -->
       <div class="task-popup-hidden" id="details">
         <div class="task-details">
           <div class="task-content">
             <label for="task-title-input" class="task-label">Task Name:</label>
-            <input type="text" id="task-title-input" class="task-title-input">
+            <input type="text" id="task-title-input" class="task-title-input" />
             <br>
+
             <label for="task-category" class="task-label">Task Category:</label>
             <select id="task-category" class="category-dropdown">
-            <option value="work">Work</option>
-            <option value="personal">Personal</option>
+              <option value="work">Work</option>
+              <option value="personal">Personal</option>
             </select>
 
             <div class="estimated-time">
               <label for="estimated-time-hours" class="task-label">Estimated Time:</label>
               <div class="time-input-container">
-                <input id="estimated-time-hours" type="number" class="time-input" min="0" max="24" placeholder="0">
+                <input id="estimated-time-hours" type="number" class="time-input" min="0" max="24" placeholder="0" />
                 <span class="time-unit">hrs</span>
-                <input id="estimated-time-minutes" type="number" class="time-input" min="0" max="59" placeholder="0">
+                <input id="estimated-time-minutes" type="number" class="time-input" min="0" max="59" placeholder="0" />
                 <span class="time-unit">mins</span>
               </div>
             </div>
-            
+
             <br>
-            <label for="task-description" style="font-family: 'Roboto', monospace; font-size: 1rem;"> Description: </label>
+            <label for="task-description" class="task-label">Description:</label>
             <textarea id="task-description" rows="4" placeholder="Description"></textarea>
             
             <button id="save-task">Save Task</button>
-            <button id="delete"> Delete</button>
+            <button id="delete">Delete</button>
           </div>
         </div>
-      </div>    
-
+      </div>
     </div>
   </div>
+
   <script src="js/app.js"></script>
   <script src="js/input.js"></script>
-
 </body>
-
 </html>

@@ -113,4 +113,15 @@
     color: black;
   }
   
+  .task-name {
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  
+  .task-category {
+    color: #6c757d;
+    font-size: 0.9rem;
+  }
+  
+  
   
