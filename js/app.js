@@ -36,23 +36,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     tasksContainer.appendChild(taskElement);
   }
 
-  // Handle task saving
+  // Task saving
   saveTaskButton.addEventListener("click", async () => {
     const name = taskNameInput.value.trim();
-    const category = categoryInput.value.trim();
+    const category = categoryInput.value.trim() || "Uncategorized";
     const hours = parseInt(hoursInput.value) || 0;
     const minutes = parseInt(minutesInput.value) || 0;
-    const description = descriptionInput.value.trim();
-
-    // Ensure the task name is valid
+    const description = descriptionInput.value.trim() || "";
+  
     if (!name || name.length < 2) {
       alert("Task name must be at least 2 characters long.");
       return;
     }
-
+  
     const time = hours + minutes / 60;
     const task = { name, category, time, description };
-
+  
     try {
       const response = await fetch("http://localhost:5000/tasks", {
         method: "POST",
@@ -61,30 +60,29 @@ document.addEventListener("DOMContentLoaded", async () => {
         },
         body: JSON.stringify(task),
       });
-
+  
       if (!response.ok) {
-        throw new Error("Failed to save task");
+        const errorData = await response.json();
+        console.error("Error response from server:", errorData);
+        throw new Error(errorData.error || "Failed to save task.");
       }
-
+  
       const savedTask = await response.json();
       console.log("Saved Task:", savedTask);
-
-      // Add the new task to the UI
+  
       renderTask(savedTask);
-
-      // Close the details box and clear inputs
       detailsBox.classList.add("task-popup-hidden");
       taskNameInput.value = "";
       categoryInput.value = "work";
       hoursInput.value = "";
       minutesInput.value = "";
       descriptionInput.value = "";
-
     } catch (error) {
       console.error("Error saving task:", error);
-      alert("Failed to save task. Please try again.");
+      alert(error.message || "Failed to save task. Please try again.");
     }
   });
+  
 
   // Fetch and display existing tasks on load
   await fetchTasks();

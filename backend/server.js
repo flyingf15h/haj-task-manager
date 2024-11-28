@@ -5,34 +5,31 @@ const cors = require("cors");
 const app = express();
 
 // Middleware
-app.use(express.json()); // Replaces body-parser.json()
+app.use(express.json()); 
 app.use(cors());
 
-// Connect to MongoDB
+// Tests mongo connectivity
 (async () => {
   try {
     await mongoose.connect("mongodb+srv://blohai:flyingblohai123@cluster0.tzcvd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
     console.log("Connected to MongoDB");
-    useNewUrlParser: true; 
-    useUnifiedTopology: true; 
   } catch (error) {
     console.error("MongoDB connection error:", error);
-    process.exit(1); // Exit the app if MongoDB connection fails
+    process.exit(1); 
   }
 })();
 
-// Task Schema
+// Let them not do time or description
 const taskSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  category: { type: String, required: true },
-  time: { type: Number, required: true }, // in hours
-  description: { type: String, required: true },
+  category: { type: String, required: true }, 
+  time: { type: Number, default: 0 }, 
+  description: { type: String, default: "" }, 
 });
 
 const Task = mongoose.model("Task", taskSchema);
 
 // Routes
-// Get all tasks
 app.get("/tasks", async (req, res) => {
   try {
     const tasks = await Task.find();
@@ -42,17 +39,30 @@ app.get("/tasks", async (req, res) => {
   }
 });
 
-// Add a new task
+// Add new task
 app.post("/tasks", async (req, res) => {
   try {
     const { name, category, time, description } = req.body;
-    const newTask = new Task({ name, category, time, description });
+
+    if (!name || name.length < 2) {
+      return res.status(400).json({ error: "Task name is required and must be at least 2 characters." });
+    }
+
+    const newTask = new Task({ 
+      name, 
+      category: category || "Uncategorized", 
+      time: time || 0, 
+      description: description || "" 
+    });
+
     await newTask.save();
     res.status(201).json(newTask);
   } catch (error) {
-    res.status(400).json({ error: "Failed to create task" });
+    console.error("Error creating task:", error);
+    res.status(400).json({ error: "Failed to create task." });
   }
 });
+
 
 // Update a task
 app.put("/tasks/:id", async (req, res) => {

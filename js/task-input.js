@@ -1,7 +1,10 @@
 document.querySelectorAll('.time-input').forEach((input) => {
     input.addEventListener('input', () => {
-      if (input.value.length > 2) {
+      if (input.value.length >= 2 && input.value.length < 20) {
         input.value = input.value.slice(0, 2); 
+      }
+      else {
+        alert("Task name must be at least 2 characters and at most 20!");
       }
     });
   });

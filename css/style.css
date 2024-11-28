@@ -80,6 +80,7 @@ hr {
 .task-list {
   margin-top: 20px;
   padding: 10px;
+  font-family: 'Roboto', monospace;
 }
 
 .task-item {
