@@ -20,19 +20,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function renderTask(task) {
+    const taskList = document.getElementById("task-list");
     const taskElement = document.createElement("div");
     taskElement.classList.add("task-item");
 
+    const categoryClass = task.category === "work" ? "work" : "personal";
     // Task structure
     taskElement.innerHTML = `
+      <input type="checkbox" class="task-checkbox ${categoryClass}" />
       <span class="task-name">${task.name}</span>
       <span class="task-category">${task.category || "No category"}</span>
       <span class="task-time">${task.time ? `${task.time.toFixed(1)} hrs` : "0.0 hrs"}</span>
-      <button data-id="${task._id}" class="edit-task">Edit</button>
-      <button data-id="${task._id}" class="delete-task">Delete</button>
     `;
 
-    // Append task to container
     tasksContainer.appendChild(taskElement);
   }
 
@@ -77,6 +77,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       hoursInput.value = "";
       minutesInput.value = "";
       descriptionInput.value = "";
+
     } catch (error) {
       console.error("Error saving task:", error);
       alert(error.message || "Failed to save task. Please try again.");

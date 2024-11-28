@@ -303,8 +303,7 @@ button:hover {
   p,
   h2,
   h3 {
-    orphans: 3;
-    widows: 3;
+    break-inside: avoid; 
   }
 
   h2,
