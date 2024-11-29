@@ -2,6 +2,8 @@
 /* Box around the task details */
 .task-details {
     background-color: #fef7ea; 
+    position: absolute; 
+    z-index: 1000; 
     margin-left: 120px;
     border-color: #ee5f76;
     transition: border-color 0.3s ease; 
@@ -18,18 +20,17 @@
   
   /* Box that description goes in */
   .task-popup {
-    position: fixed;
+    position: absolute; 
     font-family: 'Roboto', monospace;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 200px;
     padding: 20px;
-    margin-left: 30px;
+    margin: 0 auto; 
     background: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
-    z-index: 1000;
   }
   
   .task-popup-hidden {
