@@ -4,11 +4,10 @@ const cors = require("cors");
 
 const app = express();
 
-// Middleware
 app.use(express.json()); 
 app.use(cors());
 
-// Tests mongo connectivity
+// Mongo connecting testing
 (async () => {
   try {
     await mongoose.connect("mongodb+srv://blohai:flyingblohai123@cluster0.tzcvd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
@@ -19,7 +18,7 @@ app.use(cors());
   }
 })();
 
-// Let them not do time or description
+// Mandatory is name and category
 const taskSchema = new mongoose.Schema({
   name: { type: String, required: true },
   category: { type: String, required: true }, 
@@ -56,7 +55,13 @@ app.post("/tasks", async (req, res) => {
     });
 
     await newTask.save();
-    res.status(201).json(newTask);
+
+    res.status(201).json({
+      name: newTask.name,
+      category: newTask.category,
+      time: newTask.time,
+      description: newTask.description,
+    });
   } catch (error) {
     console.error("Error creating task:", error);
     res.status(400).json({ error: "Failed to create task." });
@@ -100,3 +105,4 @@ app.delete("/tasks/:id", async (req, res) => {
 // Start server
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
