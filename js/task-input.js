@@ -51,37 +51,3 @@ document.addEventListener("DOMContentLoaded", function () {
     taskNameInput.value = ""; 
 });
 });
-  
-// Save task listener
-document.getElementById("save-task").addEventListener("click", async () => {
-  const name = document.getElementById("task-title-input").value;
-  const category = document.getElementById("task-category").value;
-  const hours = parseInt(document.getElementById("estimated-time-hours").value || "0", 10);
-  const minutes = parseInt(document.getElementById("estimated-time-minutes").value || "0", 10);
-  const time = hours + minutes / 60;
-  const description = document.getElementById("task-description").value;
-  let taskIndex;
-  // find a way for it to detect the taskItem
-  
-  if (taskItem) { taskIndex = taskItem.getAttribute("task-index"); }
-  else { taskindex = "" } 
-
-  if(taskIndex != "") {
-    // update the information of the pre-existing task if it
-  }
-  else {
-    const newTask = { name, category, time, description };
-
-    const response = await fetch("http://localhost:5000/tasks", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newTask),
-    });
-
-    if (response.ok) {
-      const savedTask = await response.json();
-      renderTask(savedTask); 
-    }
-  }
-});
-

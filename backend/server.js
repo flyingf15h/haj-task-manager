@@ -4,7 +4,9 @@ const cors = require("cors");
 
 const app = express();
 
+app.use(["/tasks", "/tasks/:id"], validateUserId);
 app.use(express.json()); 
+app.use(express.static("public"));
 app.use(cors());
 
 // Mongo connecting testing
@@ -18,50 +20,83 @@ app.use(cors());
   }
 })();
 
+const validateUserId = (req, res, next) => {
+  const userId = req.query.userId || req.body.userId;
+  if (!userId) {
+    return res.status(400).json({ error: "User ID is required." });
+  }
+  req.userId = userId; 
+  next();
+};
+
 // Mandatory is name and category
 const taskSchema = new mongoose.Schema({
   name: { type: String, required: true },
   category: { type: String, required: true }, 
   time: { type: Number, default: 0 }, 
   description: { type: String, default: "" }, 
+  userId: { type: String, required: true }, 
 });
 
 const Task = mongoose.model("Task", taskSchema);
 
-// Routes
+// Fetch all tasks
 app.get("/tasks", async (req, res) => {
   try {
-    const tasks = await Task.find();
+    const { userId } = req.query;
+    const { id } = req.params;
+
+    if (!mongoose.isValidObjectId(id)) {
+      return res.status(400).json({ error: "Invalid Task ID" });
+    }
+
+    const tasks = await Task.find({userId}); 
     res.json(tasks);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch tasks" });
   }
 });
 
+// Fetch one task
+app.get("/tasks/:id", async (req, res) => {
+  try {
+    const { userId } = req.query; // Get userId from query string
+    const { id } = req.params;
+
+    console.log(`Fetchng... Task ID: ${id} for user: ${userId}`);
+    const task = await Task.findOne({ _id: id, userId });
+
+    if (!task) {
+      return res.status(404).json({ error: "Task not found" });
+    }
+
+    res.json(task); 
+  } catch (error) {
+    console.error("Error fetching task:", error);
+    res.status(500).json({ error: "Failed to fetch task" });
+  }
+});
+
 // Add new task
 app.post("/tasks", async (req, res) => {
   try {
-    const { name, category, time, description } = req.body;
+    const { name, category, time, description, userId } = req.body;
 
-    if (!name || name.length < 2) {
-      return res.status(400).json({ error: "Task name is required and must be at least 2 characters." });
+    if (!name || name.length < 2 || name.length > 20) {
+      return res.status(400).json({ error: "Task name must be at least 2 characters and at most 20." });
     }
 
-    const newTask = new Task({ 
+    const task = new Task({ 
       name, 
       category: category || "Uncategorized", 
       time: time || 0, 
-      description: description || "" 
+      description: description || "",
+      userId
     });
-
-    await newTask.save();
-
-    res.status(201).json({
-      name: newTask.name,
-      category: newTask.category,
-      time: newTask.time,
-      description: newTask.description,
-    });
+    console.log("Request Body:", req.body); 
+    await task.save();
+    
+    res.status(201).json({task});
   } catch (error) {
     console.error("Error creating task:", error);
     res.status(400).json({ error: "Failed to create task." });
@@ -72,17 +107,20 @@ app.post("/tasks", async (req, res) => {
 // Update a task
 app.put("/tasks/:id", async (req, res) => {
   try {
+    const { userId } = req.query;
     const { id } = req.params;
     const { name, category, time, description } = req.body;
-    const updatedTask = await Task.findByIdAndUpdate(
-      id,
+
+    const task = await Task.findOneAndUpdate(
+      { _id: id, userId },
       { name, category, time, description },
       { new: true }
     );
-    if (!updatedTask) {
+
+    if (!task) {
       return res.status(404).json({ error: "Task not found" });
     }
-    res.json(updatedTask);
+    res.json(task);
   } catch (error) {
     res.status(400).json({ error: "Failed to update task" });
   }
@@ -91,9 +129,10 @@ app.put("/tasks/:id", async (req, res) => {
 // Delete a task
 app.delete("/tasks/:id", async (req, res) => {
   try {
+    const { userId } = req.query;
     const { id } = req.params;
-    const deletedTask = await Task.findByIdAndDelete(id);
-    if (!deletedTask) {
+    const task = await Task.findOneAndDelete({ _id: id, userId });
+    if (!task) {
       return res.status(404).json({ error: "Task not found" });
     }
     res.status(204).send();

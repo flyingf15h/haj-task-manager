@@ -34,4 +34,3 @@ function TaskDetails({ match }) {
       <p>Loading...</p>
     );
   }
-  
