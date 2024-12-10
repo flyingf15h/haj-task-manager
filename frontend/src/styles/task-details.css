@@ -8,7 +8,7 @@
     border-color: #ee5f76;
     transition: border-color 0.3s ease; 
     border-style: solid;
-    padding: 20px;
+    padding: 25px 0px 25px 0px;
     border-radius: 4px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     display: flex;
@@ -26,20 +26,16 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 200px;
-    padding: 20px;
+    padding: 100px;
     margin: 0 auto; 
     background: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
   }
-  
-  .task-popup-hidden {
-    display: none;
-  }
 
   .task-popup-content {
     display: flex;
-    padding: 20px;
+    padding: 10px;
     gap: 10px;
     flex-direction: column;
     font-family: 'Roboto', monospace;

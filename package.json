@@ -1,30 +1,20 @@
 {
-  "name": "-",
-  "version": "0.0.1",
-  "private": true,
-  "keywords": [],
-  "license": "ISC",
-  "author": "",
+  "name": "frontend",
+  "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack serve --open --config webpack.config.dev.js",
-    "build": "webpack --config webpack.config.prod.js"
+    "start": "npm start", 
+    "build": "npm build",
+    "test": "npm test",
+    "eject": "npm eject"
   },
-  "devDependencies": {
-    "copy-webpack-plugin": "^12.0.2",
-    "html-webpack-plugin": "^5.6.3",
-    "webpack": "^5.96.1",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.1.0",
-    "webpack-merge": "^6.0.1"
-  },
-  "main": "webpack.common.js",
-  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "frontend for the task manager",
   "dependencies": {
-    "body-parser": "^1.20.3",
-    "cors": "^2.8.5",
-    "express": "^4.21.1",
-    "mongoose": "^8.8.3",
-    "nodemon": "^3.1.7"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3"
   }
 }
