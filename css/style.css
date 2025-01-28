@@ -146,8 +146,9 @@ button:hover {
 
 .main-content {
   width: 68%; 
-  height: 100%; 
+  height: 100vh; 
   background: #fef7ea;
+  overflow: hidden;
   position: relative;
   margin-left: auto; 
 }
