@@ -40,6 +40,93 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
+// Motivational quotes
+// Thought bubble elements
+  const thought = document.createElement("div");
+  thought.id = "thought";
+  thought.classList.add("thought", "thought-hidden");
+
+  const thoughtText = document.createElement("span");
+  thoughtText.id = "thought-text";
+  thought.appendChild(thoughtText);
+
+  document.querySelector(".sidebar").appendChild(thought);
+
+  const thoughts = [
+    "get to work",
+    "keep working!",
+    "you can do it",
+    "blub blub",
+    "i want fish"
+  ];
+  let lastThoughtIndex = -1;
+
+  function getRandomThought() {
+    let newIndex;
+    do {
+      newIndex = Math.floor(Math.random() * thoughts.length);
+    } while (newIndex === lastThoughtIndex);
+    
+    lastThoughtIndex = newIndex;
+    return thoughts[newIndex];
+  }
+
+  function showthought() {
+    const blahajContainer = document.getElementById('blahaj-container');
+    const thought = document.getElementById('thought');
+    const sidebar = document.querySelector('.sidebar');
+    const water = sidebar.getBoundingClientRect();
+    
+    if (blahajContainer && thought) {
+        const blahajRect = blahajContainer.getBoundingClientRect();
+        const bubbleWidth = 300; 
+        const bubbleHeight = 150;
+        
+        let left = blahajRect.left + blahajRect.width/2;
+        let top = blahajRect.top - bubbleHeight - 20;
+        
+        // Keep in sidebar bounds near blahaj
+        left = Math.max(water.left + 20, Math.min(left, water.right - bubbleWidth - 20));
+        top = Math.max(water.top + 20, Math.min(top, water.bottom - bubbleHeight - 20));
+        
+        const isLeftSide = (left - blahajRect.left) < bubbleWidth/2;
+        
+        thought.style.left = `${left - water.left}px`;
+        thought.style.top = `${top - water.top}px`;
+        
+        if (isLeftSide) {
+            thought.style.setProperty('--bubble1-left', '20%');
+            thought.style.setProperty('--bubble2-left', '15%');
+            thought.style.setProperty('--bubble3-left', '10%');
+        } else {
+            thought.style.setProperty('--bubble1-left', '80%');
+            thought.style.setProperty('--bubble2-left', '85%');
+            thought.style.setProperty('--bubble3-left', '90%');
+        }
+        
+        thoughtText.textContent = getRandomThought();
+        thought.classList.remove("thought-hidden");
+        
+        setTimeout(() => {
+            thought.classList.add("thought-hidden");
+        }, 4000);
+    }
+  }
+
+  // Random thoughts
+  function startRandomThoughts() {
+    function scheduleNextThought() {
+      const delay = Math.random() * (10000 - 6000) + 6000;
+      setTimeout(() => {
+        showthought();
+        scheduleNextThought();
+      }, delay);
+    }
+    scheduleNextThought();
+  }
+
+  startRandomThoughts();
+
 // Task manager section
   // Fetch and render all tasks
   async function fetchTasks() {
