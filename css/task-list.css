@@ -9,103 +9,135 @@
   overflow-y: auto; 
   overflow-x: hidden; 
   width: 80%; 
-  }
-  
-  /* Task items */
-  .task-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0 auto -4px; 
-    border-bottom: 4px solid gray;
-    border-top: 4px solid gray;
-    background-color: transparent; 
-    width: 100%; 
-    border-radius: 0%;
-    font-family: 'Roboto', monospace;
-  }
-  
-  .task-time {
-    font-family: 'Roboto', monospace;
-    font-size: 0.93rem;
-    padding-top: 10px;
-    margin-bottom: -10px;
-    color: black;
-  }
+}
 
-  /* Checkboxes */
-  .task-checkbox {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    appearance: none;
-    margin-right: 15px;
-    margin-left: 10px;
-    border: 3px solid gray;
-    flex-shrink: 0;
-    transition: background-color 0.3s, border-color 0.3s;
-  }
-  
-  /* Work checkbox */
-  .task-checkbox.work {
-    border-color: #ee5f76; 
-    background-color: #ffe4fa;
-  }
-  
-  .task-checkbox.work:checked {
-    background-color: #ee5f76; 
-  }
-  
-  /* Personal checkbox */
-  .task-checkbox.personal {
-    background-color: #dfc5fe;
-    border-color: #9560d4; 
-  }
-  
-  .task-checkbox.personal:checked {
-    background-color: #9560d4; 
-  }
-  
-  /* Task name styling */
-  .task-name {
-    flex-grow: 1;
-    font-size: 1.2rem;
-    margin-right: 10px;
-    cursor: pointer;
-    font-family: 'Roboto', monospace; 
-    font-weight: normal;  
-    margin: 3px;
-  }
-  
-  .task-name:hover {
-    color: gray; 
-  }
-  
-  /* Task category styling */
-  .task-category {
-    flex-basis: 70%;
-    text-align: center;
-    color: black;
-    font-size: 0.88rem;
-    font-family: 'Roboto', monospace; 
-  }
+/* Task items */
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto -4px; 
+  border-bottom: 4px solid gray;
+  border-top: 4px solid gray;
+  background-color: transparent; 
+  width: 100%; 
+  border-radius: 0%;
+  font-family: 'Roboto', monospace;
+  min-height: 60px; 
+  padding: 12px 16px;
+}
 
-  .category-bg {
-    padding: 0px 7px; 
-    border-radius: 16px; 
-    width: fit-content; 
-    display: inline-block; 
-    text-align: center; 
-    border: 3px solid gray;
-    background-color: #f0f0f0; 
-  }
-  
-  .category-bg.work {
-    background-color: #ffe4fa; 
-    border-color: #ee5f76; 
-  }
 
-  .category-bg.personal {
-    background-color: #dfc5fe;
-    border-color: #9560d4; 
-  }
+.task-time {
+  font-family: 'Roboto', monospace;
+  font-size: 0.93rem;
+  color: black;
+  padding-top: 10px;
+  margin-bottom: -10px; 
+  min-width: 80px;     
+}
+
+/* Checkboxes */
+.task-checkbox {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  appearance: none;
+  margin-right: 15px;
+  margin-left: 10px;
+  border: 3px solid gray;
+  flex-shrink: 0;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.task-checkbox.work {
+  border-color: #ee5f76; 
+  background-color: #ffe4fa;
+}
+
+.task-checkbox.personal {
+  background-color: #dfc5fe;
+  border-color: #9560d4; 
+}
+
+.task-name {
+  flex-grow: 1;
+  flex-basis: 40%; 
+  font-size: 1.15rem;
+  margin-right: 10px;
+  cursor: pointer;
+  font-family: 'Roboto', monospace;
+  font-weight: normal;
+  white-space: normal; 
+  word-break: break-word; 
+}
+
+.task-name:hover {
+  color: gray; 
+}
+
+/* Category */
+.task-category {
+  flex-basis: 60%;
+  text-align: center;
+  color: black;
+  font-size: 0.88rem;
+  font-family: 'Roboto', monospace; 
+}
+
+.category-bg {
+  padding: 0px 7px; 
+  border-radius: 16px; 
+  width: fit-content; 
+  display: inline-block; 
+  text-align: center; 
+  border: 3px solid gray;
+  background-color: #f0f0f0; 
+}
+
+.category-bg.work {
+  background-color: #ffe4fa; 
+  border-color: #ee5f76; 
+}
+
+.category-bg.personal {
+  background-color: #dfc5fe;
+  border-color: #9560d4; 
+}
+
+/* Complete tasks */ 
+.task-item.completed {
+  color: gray;
+  position: relative;
+}
+
+.task-item.completed .task-checkbox.work {
+  background-color: #ee5f76; 
+}
+
+.task-item.completed .task-checkbox.personal {
+  background-color: #9560d4;
+}
+
+.task-item.completed::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(200, 200, 200, 0.5); 
+  pointer-events: none; 
+}
+
+.task-item.completed::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 7%;
+  width: 70%;
+  height: 4px; 
+  background-color: gray; 
+  border-radius: 50px;
+  transform: translateY(-50%);
+}

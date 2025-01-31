@@ -43,13 +43,13 @@
   }
 
   /* Number input and hrs label */
-  .time-input-container {
+  .time-container {
     display: flex;
     align-items: center;
     gap: 5px; 
   }
 
-  .task-title-input {
+  .title-input {
     width: 70%;
     padding: 8px;
     font-family: 'Roboto', monospace;
@@ -60,7 +60,7 @@
     align-items: left;
   }
   
-  .task-title-input:focus {
+  .title-input:focus {
     outline: none;
     text-align: left;
     border-color: #237980; 

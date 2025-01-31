@@ -135,13 +135,28 @@ button:hover {
   flex-direction: column; 
   justify-content: center; 
   align-items: center; 
-
+  top: 10%;
   font-family: 'Cascadia Code', monospace; 
   font-size: 22px;
   text-align: center; 
   width: 100%;
   height: 100%;
   color: #222;
+}
+
+.blohai-name {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Cascadia Code', monospace;
+  font-size: 20px;
+  padding: 5px 16px;
+  border: 3.5px solid black;
+  border-radius: 40px;
+  background-color: transparent;
+  color: black;
+  background-color: #ffebee;
 }
 
 .main-content {
@@ -153,65 +168,51 @@ button:hover {
   margin-left: auto; 
 }
 
+#heart-bar-container {
+  position: absolute;
+  top: 80%; 
+  left: 46.5%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+}
+
+#heart-icon {
+  width: 34px;
+  height: 34px;
+  background: lightpink;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  color: red;
+  font-weight: bold;
+  border: 3.5px solid black;
+  margin-right: 10px;
+}
+
+#heart-bar {
+  width: 240px; 
+  height: 26px; 
+  background: #ddd;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 4px solid black;
+}
+
+#heart-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, #ff4d4d, #ff0000);
+  transition: width 0.5s ease-in-out;
+}
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */
 
 /*
- * Hide visually and from screen readers
- */
-
-.hidden,
-[hidden] {
-  display: none !important;
-}
-
-/*
- * Hide only visually, but have it available for screen readers:
- * https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
- *
- * 1. For long content, line feeds are not interpreted as spaces and small width
- *    causes content to wrap 1 word per line:
- *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
- */
-
-.visually-hidden {
-  border: 0;
-  clip: rect(0, 0, 0, 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
-  /* 1 */
-}
-
-/*
- * Extends the .visually-hidden class to allow the element
- * to be focusable when navigated to via the keyboard:
- * https://www.drupal.org/node/897638
- */
-
-.visually-hidden.focusable:active,
-.visually-hidden.focusable:focus {
-  clip: auto;
-  height: auto;
-  margin: 0;
-  overflow: visible;
-  position: static;
-  white-space: inherit;
-  width: auto;
-}
-
-/*
- * Hide visually and from screen readers, but maintain layout
- */
-
-.invisible {
-  visibility: hidden;
-}
 
 /*
  * Clearfix: contain floats
@@ -311,4 +312,32 @@ button:hover {
   h3 {
     page-break-after: avoid;
   }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.overlay.active {
+  display: flex;
+}
+
+.overlay-content {
+  width: 300px;
+  height: 300px;
+}
+
+.overlay-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
