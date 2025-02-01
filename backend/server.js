@@ -2,18 +2,18 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 require('dotenv').config();
+console.log("MONGO_URI:", process.env.MONGO_URI); 
 
 const app = express();
 
 app.use(express.json()); 
 app.use(cors());
-const mongo = process.env.MONGO_URI;
-
+const mongoURI = process.env.MONGO_URI;
 // Mongo connecting testing
 (async () => {
   try {
     if (!process.env.MONGO_URI) throw new Error("MONGO_URI is missing");
-    await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
     console.log("Connected to MongoDB");
   } catch (error) {
     console.error("MongoDB connection error: ", error.message);
