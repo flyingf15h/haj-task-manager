@@ -10,11 +10,16 @@ app.use(cors());
 // Mongo connecting testing
 (async () => {
   try {
+    console.log('Attempting to connect with URI:', process.env.MONGODB_URI);
+    if (!process.env.MONGODB_URI) {
+      throw new Error('MONGODB_URI env variable not set');
+    }
+
     await mongoose.connect(process.env.MONGODB_URI);
     console.log("Connected to MongoDB");
   } catch (error) {
     console.error("MongoDB connection error:", error);
-    process.exit(1); 
+    process.exit(1);
   }
 })();
 
@@ -103,5 +108,5 @@ app.delete("/tasks/:id", async (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT}`));
 
