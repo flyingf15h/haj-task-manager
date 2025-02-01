@@ -14,15 +14,22 @@ document.addEventListener("DOMContentLoaded", function () {
   const descriptionBox = document.getElementById("details"); 
   const deleteButton = document.getElementById("delete"); 
   const saveButton = document.getElementById("save-task");
-  const taskTitleInput = document.getElementById("task-title-input"); 
+  const taskTitleInput = document.getElementById("title-input"); 
   const detailsBox = document.querySelector(".task-details");
-  const taskCategoryDropdown = document.getElementById("task-category");
+  const taskCategoryDropdown = document.getElementById("category");
 
   taskNameInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter" && taskNameInput.value.trim() !== "") {
       descriptionBox.classList.remove("task-popup-hidden"); 
       taskTitleInput.value = taskNameInput.value;
       taskNameInput.disabled = true;
+      
+      // Clear fields
+      document.getElementById("category").value = "work"; 
+      document.getElementById("hours").value = "";
+      document.getElementById("mins").value = "";
+      document.getElementById("description").value = "";
+      taskTitleInput.removeAttribute("data-task-id");
     }
   });
 
@@ -38,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   
   deleteButton?.addEventListener("click", async function () {
-    const taskTitleInput = document.getElementById("task-title-input");
+    const taskTitleInput = document.getElementById("title-input");
     const taskId = taskTitleInput?.getAttribute("data-task-id");
   
     if (!taskId) {
