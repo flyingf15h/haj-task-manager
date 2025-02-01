@@ -4,9 +4,8 @@ WORKDIR /usr/src/app
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 RUN npm install --omit=dev
 COPY . .
-ENV MONGO_URI=${MONGO_URI}
-COPY .env .env
-EXPOSE 8080
+ENV MONGODB_URI=${MONGODB_URI}
+EXPOSE 5000
 RUN chown -R node /usr/src/app
 USER node
 CMD ["npm", "start"]

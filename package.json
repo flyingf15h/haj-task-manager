@@ -5,9 +5,13 @@
   "keywords": [],
   "license": "ISC",
   "author": "",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
     "build": "webpack --config webpack.config.prod.js"
   },
   "devDependencies": {
