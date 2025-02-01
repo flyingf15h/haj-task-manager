@@ -2,9 +2,7 @@ FROM node:lts-alpine
 ENV NODE_ENV=production
 WORKDIR /usr/src/app
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
-RUN npm install --production --silent && mv node_modules ../
-RUN npm install --production && npm install webpack webpack-cli
-RUN npm install
+RUN npm install --omit=dev
 COPY . .
 EXPOSE 8080
 RUN chown -R node /usr/src/app
