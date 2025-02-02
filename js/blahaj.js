@@ -36,7 +36,7 @@ class BlahajPet {
     }
 
     loadAnimation(name) {
-        return [`./gifs/${name}.gif`];
+        return [`/gifs/${name}.gif`];
     }
 
     setupBlahaj() {
