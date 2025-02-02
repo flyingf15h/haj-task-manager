@@ -1,4 +1,5 @@
 import { makeHappy } from './blahaj.js';
+import { API_URL } from './config.js';
 window.tasks = [];
 let tasks = window.tasks;
 
