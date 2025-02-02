@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`${API_URL}/tasks/${taskId}`);
             const task = await response.json();
             
-            document.getElementById('title-input').value = task.title;
+            document.getElementById('title-input').value = task.name;
             document.getElementById('category').value = task.category;
             document.getElementById('description').value = task.description;
             
