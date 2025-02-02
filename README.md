@@ -19,6 +19,7 @@ Blahaj swims around with encouragement.
 
 
 Don't disappoint the haj
-https://cloud-1kna9qa7t-hack-club-bot.vercel.app/0image.png
+
+![image](https://github.com/user-attachments/assets/08e6a4b3-01e3-4853-b5a6-e7031bf77c5b)
 
 Kinda buggy working on that 
