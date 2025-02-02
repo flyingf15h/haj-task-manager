@@ -29,7 +29,8 @@ const taskSchema = new mongoose.Schema({
   name: { type: String, required: true },
   category: { type: String, required: true }, 
   time: { type: Number, default: 0 }, 
-  description: { type: String, default: "" }, 
+  description: { type: String, default: "" },
+  completed: { type: Boolean, default: false }
 });
 
 const Task = mongoose.model("Task", taskSchema);
@@ -79,10 +80,10 @@ app.post("/tasks", async (req, res) => {
 app.put("/tasks/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, category, time, description } = req.body;
+    const { name, category, time, description, completed } = req.body;
     const updatedTask = await Task.findByIdAndUpdate(
       id,
-      { name, category, time, description },
+      { name, category, time, description, completed },
       { new: true }
     );
     if (!updatedTask) {

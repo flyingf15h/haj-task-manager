@@ -1,5 +1,4 @@
 import { makeHappy } from './blahaj.js';
-import { API_URL } from './config.js';
 window.tasks = [];
 let tasks = window.tasks;
 
@@ -191,7 +190,10 @@ document.addEventListener("DOMContentLoaded", async () => {
           await fetch(`${API_URL}/tasks/${taskId}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ completed: task.completed }),
+            body: JSON.stringify({
+              ...task,
+              completed: task.completed
+            }),
           });
     
           let changeAmount = task.completed ? 25 : -25;
