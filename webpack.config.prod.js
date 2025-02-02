@@ -1,16 +1,15 @@
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const path = require('path');
 
 module.exports = merge(common, {
   mode: 'production',
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './index.html',
-    }),
     new CopyPlugin({
       patterns: [
+        { from: 'index.html', to: 'index.html' },
+        { from: 'js', to: 'js' },
         { from: 'img', to: 'img' },
         { from: 'css', to: 'css' },
         { from: 'js/vendor', to: 'js/vendor' },
@@ -20,6 +19,7 @@ module.exports = merge(common, {
         { from: 'icon.png', to: 'icon.png' },
         { from: '404.html', to: '404.html' },
         { from: 'site.webmanifest', to: 'site.webmanifest' },
+        { from: "js", to: "js" },
       ],
     }),
   ],
