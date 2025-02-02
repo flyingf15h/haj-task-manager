@@ -1,7 +1,9 @@
+import { API_URL } from './config.js';
+
 document.addEventListener('DOMContentLoaded', () => {    
     async function loadTaskDetails(taskId) {
         try {
-            const response = await fetch(`http://localhost:5000/tasks/${taskId}`);
+            const response = await fetch(`${API_URL}/tasks/${taskId}`);
             const task = await response.json();
             
             document.getElementById('title-input').value = task.title;

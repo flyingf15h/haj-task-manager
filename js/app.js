@@ -1,4 +1,5 @@
 import { makeHappy } from './blahaj.js';
+import { API_URL } from './config.js';
 window.tasks = [];
 let tasks = window.tasks;
 
@@ -130,34 +131,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 // Task manager section
   // Fetch and render all tasks
   async function fetchTasks() {
-  try {
-    const response = await fetch("http://localhost:5000/tasks");
-    const fetchedTasks = await response.json();
-    tasks = fetchedTasks;
-    let totalHeartProgress = 0;
-
-    tasks.forEach((task) => {
-      renderTask(task);
-      const taskItem = document.querySelector(`[data-task-id="${task._id}"]`);
-      
-      if (task.completed) {
-        taskItem.classList.add("completed");
-        let increaseAmount = 25 + (task.time ? 5 * task.time : 0);
-        totalHeartProgress += increaseAmount;
-        taskItem.querySelector(".task-checkbox").checked = true;
-      }
-    });
-
-    heartFill.style.width = `${Math.min(100, totalHeartProgress)}%`;
-    localStorage.setItem("heartProgress", Math.min(100, totalHeartProgress));
-  } catch (error) {
-    console.error("Error fetching tasks:", error);
-  }
-}
-
-  async function fetchTasks() {
     try {
-      const response = await fetch("http://localhost:5000/tasks");
+      const response = await fetch(`${API_URL}/tasks`);
       const fetchedTasks = await response.json();
       tasks = fetchedTasks;
       let totalHeartProgress = 0;
@@ -213,7 +188,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         task.completed = taskItem.classList.contains("completed");
     
         try {
-          await fetch(`http://localhost:5000/tasks/${taskId}`, {
+          await fetch(`${API_URL}/tasks/${taskId}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ completed: task.completed }),

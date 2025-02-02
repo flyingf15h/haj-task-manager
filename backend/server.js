@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require('path');
 require('dotenv').config({ path: './.env' });
 const app = express();
 
@@ -19,7 +20,7 @@ app.use(cors());
     console.log("Connected to MongoDB");
   } catch (error) {
     console.error("MongoDB connection error:", error);
-    process.exit(1);
+    process.exit(1); 
   }
 })();
 
@@ -106,6 +107,21 @@ app.delete("/tasks/:id", async (req, res) => {
     res.status(400).json({ error: "Failed to delete task" });
   }
 });
+
+// Serve frontend too
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../dist')));
+  
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../dist/index.html'));
+  });
+} else {
+  app.use(express.static(path.join(__dirname, '..')));
+  
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../index.html'));
+  });
+}
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT}`));

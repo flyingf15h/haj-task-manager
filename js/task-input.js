@@ -1,3 +1,5 @@
+import { API_URL } from './config.js';
+
 document.querySelectorAll('.time-input').forEach((input) => {
   input.addEventListener('input', () => {
     if (input.value.length >= 0 && input.value.length <= 2) {
@@ -59,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (taskElement) {
         taskElement.remove();
       }
-      const response = await fetch(`http://localhost:5000/tasks/${taskId}`, {
+      const response = await fetch(`${API_URL}/tasks/${taskId}`, {
         method: "DELETE",
       });
   
@@ -98,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
     try {
       if (taskId && taskId !== "undefined") {
         // Update existing task
-        const response = await fetch(`http://localhost:5000/tasks/${taskId}`, {
+        const response = await fetch(`${API_URL}/tasks/${taskId}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(taskData),
@@ -136,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       } else {
         // Create new task
-        const response = await fetch("http://localhost:5000/tasks", {
+        const response = await fetch(`${API_URL}/tasks`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(taskData),
