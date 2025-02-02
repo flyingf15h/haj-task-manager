@@ -22,4 +22,4 @@ Don't disappoint the haj
 
 ![image](https://github.com/user-attachments/assets/08e6a4b3-01e3-4853-b5a6-e7031bf77c5b)
 
-Kinda buggy working on that 
+A mild dose of bugginess  
